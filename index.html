@@ -1,233 +1,128 @@
-￦<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>할로윈 파티</title>
-	<style>
-		:root {
-			--orange: #ff7a18;
-			--yellow: #ffd166;
-			--purple: #8b5cf6;
-			--panel: rgba(17, 10, 31, 0.9);
-			--muted: #cfc6df;
-		}
-
-		* { box-sizing: border-box; }
-
-		body {
-			min-height: 100vh;
-			margin: 0;
-			color: #fff;
-			font-family: "Malgun Gothic", Arial, sans-serif;
-			background:
-				radial-gradient(circle at 82% 13%, #fff0b3 0 58px, transparent 60px),
-				linear-gradient(155deg, #32164d 0%, #12091f 48%, #030306 100%);
-		}
-
-		body::before {
-			content: "";
-			position: fixed;
-			inset: 0;
-			pointer-events: none;
-			background: repeating-linear-gradient(110deg, transparent 0 42px, rgba(255,255,255,.018) 43px 44px);
-		}
-
-		.screen {
-			width: min(920px, calc(100% - 32px));
-			margin: 0 auto;
-			padding: 50px 0;
-		}
-
-		.hero { text-align: center; }
-		.hero .pumpkin { font-size: 68px; }
-		.hero h1 {
-			margin: 4px 0 8px;
-			color: var(--orange);
-			font-size: clamp(34px, 7vw, 64px);
-			letter-spacing: 4px;
-			text-shadow: 0 0 18px rgba(255,122,24,.65);
-		}
-		.hero p { margin: 0 0 28px; color: var(--muted); }
-
-		.panel {
-			padding: 28px;
-			border: 1px solid rgba(139,92,246,.65);
-			border-radius: 22px;
-			background: var(--panel);
-			box-shadow: 0 18px 60px rgba(0,0,0,.45);
-			backdrop-filter: blur(8px);
-		}
-
-		label, legend { font-weight: 700; }
-		.student-id { margin-bottom: 24px; }
-		.student-id input {
-			width: 100%;
-			margin-top: 9px;
-			padding: 14px 16px;
-			border: 2px solid #59446f;
-			border-radius: 12px;
-			outline: none;
-			font-size: 18px;
-		}
-		.student-id input:focus { border-color: var(--orange); }
-		.help { display: block; margin-top: 7px; color: var(--muted); font-size: 13px; }
-
-		fieldset { margin: 0; padding: 0; border: 0; }
-		legend { margin-bottom: 12px; font-size: 20px; }
-		.game-grid {
-			display: grid;
-			grid-template-columns: repeat(2, minmax(0, 1fr));
-			gap: 12px;
-		}
-
-		.game-card {
-			display: flex;
-			align-items: center;
-			gap: 12px;
-			min-height: 72px;
-			padding: 14px;
-			border: 2px solid #4c3a60;
-			border-radius: 14px;
-			background: #211431;
-			cursor: pointer;
-			transition: transform .15s, border-color .15s, background .15s;
-		}
-		.game-card:hover { transform: translateY(-2px); border-color: var(--orange); }
-		.game-card:has(input:checked) { border-color: var(--orange); background: #392037; }
-		.game-card input { accent-color: var(--orange); }
-		.icon { font-size: 27px; }
-
-		.preparing {
-			margin-top: 22px;
-			padding: 16px;
-			border-radius: 14px;
-			color: #a99dbb;
-			background: rgba(255,255,255,.045);
-		}
-		.preparing h2 { margin: 0 0 8px; color: #d7cde4; font-size: 16px; }
-		.preparing p { margin: 4px 0; }
-
-		.notice {
-			display: flex;
-			gap: 9px;
-			margin: 22px 0;
-			color: #eee8f7;
-			font-weight: 400;
-			line-height: 1.5;
-		}
-		.notice input { margin-top: 5px; accent-color: var(--orange); }
-
-		.submit-button {
-			width: 100%;
-			padding: 16px;
-			border: 0;
-			border-radius: 13px;
-			color: #241025;
-			font-size: 18px;
-			font-weight: 800;
-			background: linear-gradient(135deg, var(--yellow), var(--orange));
-			cursor: pointer;
-		}
-		.submit-button:hover { filter: brightness(1.08); }
-
-		#result {
-			margin-top: 16px;
-			padding: 14px;
-			border-radius: 12px;
-			text-align: center;
-			background: rgba(139,92,246,.2);
-		}
-
-		.admin-link {
-			display: block;
-			margin-top: 18px;
-			color: #90869d;
-			text-align: center;
-			font-size: 13px;
-		}
-
-		@media (max-width: 620px) {
-			.screen { padding: 28px 0; }
-			.panel { padding: 20px; }
-			.game-grid { grid-template-columns: 1fr; }
-		}
-	</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>10월 31일, 5학년 3반의 할로윈 파티!</title>
+  <style>
+    :root { --orange:#ff7a18; --yellow:#ffd166; --purple:#8b5cf6; --panel:rgba(17,10,31,.9); --muted:#cfc6df; }
+    * { box-sizing:border-box; }
+    body { min-height:100vh; margin:0; color:#fff; font-family:"Malgun Gothic",Arial,sans-serif; background:radial-gradient(circle at 82% 13%,#fff0b3 0 58px,transparent 60px),linear-gradient(155deg,#32164d 0%,#12091f 48%,#030306 100%); }
+    .screen { width:min(920px,calc(100% - 32px)); margin:auto; padding:42px 0; }
+    .hero { text-align:center; }
+    .pumpkin { font-size:clamp(34px,7vw,58px); }
+    .hero h1 { margin:4px 0 8px; color:var(--orange); font-size:clamp(34px,7vw,64px); letter-spacing:4px; text-shadow:0 0 18px #ff7a18a6; }
+    .hero p { margin:0; color:var(--muted); }
+    .hero h4 { margin:9px 0 26px; }
+    .panel { padding:28px; border:1px solid #8b5cf6a6; border-radius:22px; background:var(--panel); box-shadow:0 18px 60px #00000073; backdrop-filter:blur(8px); }
+    label,legend { font-weight:700; }
+    .student-id { margin-bottom:24px; }
+    .student-input { display:flex; align-items:center; gap:10px; margin-top:9px; padding-left:14px; border:2px solid #59446f; border-radius:14px; background:#fff; box-shadow:0 8px 22px #0003; }
+    .student-input:focus-within { border-color:var(--orange); box-shadow:0 0 0 4px #ff7a182d,0 10px 26px #0004; }
+    .student-input span { font-size:24px; }
+    .student-input input { width:100%; padding:14px 14px 14px 2px; border:0; border-radius:14px; outline:0; font-size:18px; }
+    .help { display:block; margin-top:8px; color:var(--muted); font-size:13px; }
+    fieldset { margin:0; padding:0; border:0; }
+    legend { margin-bottom:12px; font-size:20px; }
+    .game-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+    .game-card { display:flex; align-items:center; gap:12px; min-height:76px; padding:14px; border:2px solid #4c3a60; border-radius:14px; background:#211431; cursor:pointer; transition:transform .15s,border-color .15s,background .15s; }
+    .game-card:hover { transform:translateY(-2px); border-color:var(--orange); }
+    .game-card:has(input:checked) { border-color:var(--orange); background:#392037; box-shadow:0 0 18px #ff7a1833; }
+    .game-card input { accent-color:var(--orange); }
+    .icon { width:34px; text-align:center; font-size:29px; }
+    .notice { display:flex; gap:9px; margin:22px 0; padding:15px; border-radius:13px; color:#eee8f7; font-weight:400; line-height:1.5; background:#ffffff0d; }
+    .notice input { margin-top:5px; accent-color:var(--orange); }
+    .submit-button { width:100%; padding:16px; border:0; border-radius:13px; color:#241025; font-size:18px; font-weight:800; background:linear-gradient(135deg,var(--yellow),var(--orange)); cursor:pointer; }
+    .submit-button:hover { filter:brightness(1.08); }
+    .submit-button:disabled { opacity:.65; cursor:wait; }
+    #result { margin-top:16px; padding:14px; border-radius:12px; text-align:center; font-weight:700; background:#8b5cf633; }
+    .admin-link { display:block; margin-top:18px; color:#90869d; text-align:center; font-size:13px; }
+    @media (max-width:620px) { .screen{padding:28px 0}.panel{padding:20px}.game-grid{grid-template-columns:1fr}.pumpkin{font-size:34px} }
+  </style>
 </head>
 <body>
-	<main class="screen">
-		<header class="hero">
-			<div class="pumpkin" aria-hidden="true">🎃5-3 할로윈 파티 🎃</div>
-			<h1>HALLOWEEN PARTY</h1>
-			<p>할로윈 파티에 오신 것을 환영합니다!</p>
-            <h4>Welcome! 재밌게 즐겨주세용</h4>
-		</header>
+  <main class="screen">
+    <header class="hero">
+      <div class="pumpkin" aria-hidden="true">🎃 5-3 할로윈 파티 🎃</div>
+      <h1>HALLOWEEN PARTY</h1>
+      <p>할로윈 파티에 오신 것을 환영합니다!</p>
+      <h4>Welcome! 재밌게 즐겨주세용</h4>
+    </header>
 
-		<section class="panel" aria-labelledby="reservation-title">
-			<h2 id="reservation-title">예약하기</h2>
+    <section class="panel" aria-labelledby="reservation-title">
+      <h2 id="reservation-title">예약하기</h2>
+      <form id="reservation-form">
+        <div class="student-id">
+          <label for="student-id">학년반번호</label>
+          <div class="student-input">
+            <input id="student-id" name="studentId" type="text" inputmode="numeric" maxlength="5" pattern="[0-9]{5}" placeholder="예: 50321" required>
+          </div>
+          <span class="help">학년·반·번호를 이어서 5자리로 입력하세요.</span>
+        </div>
 
-			<form id="reservation-form">
-				<div class="student-id">
-					<label for="student-id">학년반번호</label>
-					<input id="student-id" name="studentId" type="text" inputmode="numeric"
-						maxlength="5" pattern="[0-9]{5}" placeholder="예: 50301" required>
-					<span class="help">학년반번호를 입력하세요 (예:50321).</span>
-				</div>
+        <fieldset>
+          <legend>하고 싶은 게임을 선택하세요</legend>
+          <div class="game-grid">
+            <label class="game-card"><input type="radio" name="game" value="halloween-salon" required><span class="icon">💇</span><span>할로윈 미용실</span></label>
+            <label class="game-card"><input type="radio" name="game" value="ghost-hunt"><span class="icon">👻</span><span>유령잡기</span></label>
+            <label class="game-card"><input type="radio" name="game" value="pumpkin-chef"><span class="icon">🎃</span><span>호박 요리사</span></label>
+          </div>
+        </fieldset>
 
-				<fieldset>
-					<legend>하고 싶은 체험을 선택해 주세요.</legend>
-					<div class="game-grid">
-						<label class="game-card"><input type="radio" name="game" value="유령열차" required><span class="icon">🚇</span><span>유령열차</span></label>
-						<label class="game-card"><input type="radio" name="game" value="포토부스"><span class="icon">💀</span><span>포토부스</span></label>
-						<label class="game-card"><input type="radio" name="game" value="공포 영상 보기"><span class="icon">📽️</span><span>공포 영상 보기</span></label>
-						<label class="game-card"><input type="radio" name="game" value="유령잡기"><span class="icon">👻</span><span>유령잡기</span></label>
-						<label class="game-card"><input type="radio" name="game" value="물건 맞추기"><span class="icon">🪄</span><span>물건 맞추기</span></label>
-						<label class="game-card"><input type="radio" name="game" value="페이스페인팅"><span class="icon">🎨</span><span>페이스페인팅</span></label>
-						<label class="game-card"><input type="radio" name="game" value="호박요리사"><span class="icon">🎃</span><span>호박요리사</span></label>
-						<label class="game-card"><input type="radio" name="game" value="할로윈 미용실"><span class="icon">✂️</span><span>할로윈 미용실</span></label>
-						<label class="game-card"><input type="radio" name="game" value="마녀의 재판"><span class="icon">🧙‍♀️</span><span>마녀의 재판</span></label>
-						
-						
-					</div>
-				</fieldset>
+        <label class="notice">
+          <input type="checkbox" required>
+          <span>대리 신청으로 발생하는 문제와 불이익은 신청을 부탁한 학생이 책임집니다.</span>
+        </label>
 
-				<section class="preparing">
-					<h2>플레이가 불가능한 게임</h2>
-					<p>없습니다!</p>
-				</section>
+        <button class="submit-button" type="submit">예약 신청하기</button>
+      </form>
 
-				<label class="notice">
-					<input type="checkbox" required>
-					<span>대리 신청으로 발생하는 문제와 불이익은 신청을 부탁한 학생이 책임집니다.</span>
-				</label>
+      <div id="result" role="status" aria-live="polite" hidden></div>
+      <a class="admin-link" href="admin.html">운영자 로그인</a>
+    </section>
+  </main>
 
-				<button class="submit-button" type="submit">예약 신청하기</button>
-			</form>
+  <script>
+    const form = document.querySelector("#reservation-form");
+    const result = document.querySelector("#result");
+    const gameNames = { "halloween-salon":"할로윈 미용실", "ghost-hunt":"유령잡기", "pumpkin-chef":"호박 요리사" };
 
-			<div id="result" role="status" hidden></div>
-			<a class="admin-link" href="admin.html">운영자 패널 로그인</a>
-		</section>
-	</main>
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const button = form.querySelector(".submit-button");
+      const studentId = document.querySelector("#student-id").value.trim();
+      const game = form.elements.game.value;
 
-	<script>
-		const form = document.querySelector("#reservation-form");
-		const result = document.querySelector("#result");
+      if (!/^\d{5}$/.test(studentId)) {
+        showResult("학년반번호 5자리를 정확히 입력해 주세요.");
+        return;
+      }
 
-		form.addEventListener("submit", function (event) {
-			event.preventDefault();
+      button.disabled = true;
+      button.textContent = "예약 중...";
 
-			const studentId = document.querySelector("#student-id").value;
-			const selectedGame = document.querySelector('input[name="game"]:checked');
+      try {
+        const response = await fetch("/api/reservations", {
+          method: "POST",
+          headers: { "Content-Type":"application/json" },
+          body: JSON.stringify({ studentId, game:gameNames[game] })
+        });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || "예약하지 못했습니다.");
+        showResult(`${studentId} 학생의 ${gameNames[game]} 예약이 완료되었습니다. 예약번호: ${data.reservationCode}`);
+        form.reset();
+      } catch (error) {
+        showResult(error.message);
+      } finally {
+        button.disabled = false;
+        button.textContent = "예약 신청하기";
+      }
+    });
 
-			if (!/^\d{5}$/.test(studentId)) {
-				result.hidden = false;
-				result.textContent = "학년반번호 5자리를 정확히 입력해 주세요.";
-				return;
-			}
-
-			result.hidden = false;
-			result.textContent = studentId + " 학생의 " + selectedGame.value + " 예약 신청을 확인했습니다.";
-		});
-	</script>
+    function showResult(message) {
+      result.hidden = false;
+      result.textContent = message;
+    }
+  </script>
 </body>
 </html>
