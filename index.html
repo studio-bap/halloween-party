@@ -101,15 +101,7 @@
 
       button.disabled = true;
       button.textContent = "예약 중...";
-
-      try {
-        const response = await fetch("/api/reservations", {
-          method: "POST",
-          headers: { "Content-Type":"application/json" },
-          body: JSON.stringify({ studentId, game:gameNames[game] })
-        });
-        const data = await response.json();
-        if (!response.ok) throw new Error(data.error || "예약하지 못했습니다.");
+        
         showResult(`${studentId} 학생의 ${gameNames[game]} 예약이 완료되었습니다. 예약번호: ${data.reservationCode}`);
         form.reset();
       } catch (error) {
