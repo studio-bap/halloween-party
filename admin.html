@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <body>
+<head>
+  <meta charset="UTF-8">
+  <title>할로윈 파티</title>
+</head>
+<body>
 
-<a class="admin-link" href="#" onclick="goAdmin(event)">운영자 로그인</a>
+  <a class="admin-link" href="#" onclick="goAdmin(event)">운영자 로그인</a>
 
-<script>
-function goAdmin(e) {
-  e.preventDefault();
-  const password = prompt("운영자 암호를 입력하세요:");
-    
-  if (password === "1031") {
-    location.href = "admin.html";
-  } else if (password !== null) {
-    alert("암호가 올바르지 않습니다!");
-  }
-}
-</script>
-    </body>
-  </head>
+  <script>
+    function goAdmin(e) {
+      e.preventDefault();
+      const password = prompt("운영자 암호를 입력하세요:");
+      
+      if (password === "1031") {
+        location.href = "admin.html";
+      } else if (password !== null) {
+        alert("암호가 올바르지 않습니다!");
+      }
+    }
+  </script>
+</body>
+</html>
