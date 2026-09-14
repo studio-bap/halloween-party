@@ -95,22 +95,11 @@
       const game = form.elements.game.value;
 
       if (!/^\d{5}$/.test(studentId)) {
-        alert("학년반번호 5자리를 정확히 입력해 주세요.");
+        showResult("학년반번호 5자리를 정확히 입력해 주세요.");
         return;
       }
 
-      button.disabled = true;
-      button.textContent = "예약 중...";
-        
-        showResult(`${studentId} 학생의 ${gameNames[game]} 예약이 완료되었습니다. 예약번호: ${data.reservationCode}`);
-        form.reset();
-      } catch (error) {
-        showResult(error.message);
-      } finally {
-        button.disabled = false;
-        button.textContent = "예약 신청하기";
-      }
-    });
+      showResult("예약이 완료되었습니다")
 
     function showResult(message) {
       result.hidden = false;
