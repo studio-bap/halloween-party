@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>할로윈 게임존</title>
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="halloween-pumpkin-icon.png"
+    >
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            margin: 0;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            color: white;
+            font-family: "Malgun Gothic", Arial, sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at 80% 15%,
+                    #fff0b3 0 60px,
+                    transparent 62px
+                ),
+                linear-gradient(
+                    155deg,
+                    #32164d,
+                    #12091f 48%,
+                    #030306
+                );
+        }
+
+        .game-zone {
+            width: min(900px, calc(100% - 40px));
+            padding: 40px;
+
+            border: 2px solid #8b5cf6;
+            border-radius: 24px;
+
+            text-align: center;
+
+            background: rgba(17, 10, 31, 0.92);
+
+            box-shadow:
+                0 0 30px rgba(139, 92, 246, 0.45),
+                0 20px 60px rgba(0, 0, 0, 0.55);
+        }
+
+        .game-zone h1 {
+            margin: 0;
+
+            color: #ff7a18;
+            font-size: clamp(38px, 7vw, 70px);
+            letter-spacing: 4px;
+
+            text-shadow:
+                0 0 18px rgba(255, 122, 24, 0.65);
+        }
+
+        .game-zone > p {
+            margin: 12px 0 34px;
+
+            color: #cfc6df;
+            font-size: 18px;
+        }
+
+        .game-list {
+            display: grid;
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
+            gap: 18px;
+        }
+
+        .game-button {
+            min-height: 210px;
+            padding: 24px 16px;
+
+            border: 2px solid #5d466f;
+            border-radius: 20px;
+
+            color: white;
+            background: #211431;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.2s,
+                border-color 0.2s,
+                box-shadow 0.2s;
+        }
+
+        .game-button:not(:disabled):hover {
+            transform: translateY(-7px);
+
+            border-color: #ff7a18;
+
+            box-shadow:
+                0 12px 28px rgba(255, 122, 24, 0.28);
+        }
+
+        .game-icon {
+            display: block;
+
+            margin-bottom: 14px;
+
+            font-size: 70px;
+        }
+
+        .game-name {
+            display: block;
+
+            font-size: 23px;
+            font-weight: 800;
+        }
+
+        .game-status {
+            display: block;
+
+            margin-top: 10px;
+
+            color: #b7aac7;
+            font-size: 14px;
+        }
+
+        .game-button.available {
+            border-color: #ff7a18;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #47223b,
+                    #251433
+                );
+        }
+
+        .game-button.available .game-status {
+            color: #ffd166;
+        }
+
+        .game-button:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+        }
+
+        .back-button {
+            display: inline-block;
+
+            margin-top: 30px;
+
+            color: #a99dbb;
+            text-decoration: none;
+        }
+
+        .back-button:hover {
+            color: white;
+        }
+
+        @media (max-width: 720px) {
+            .game-zone {
+                padding: 28px 20px;
+            }
+
+            .game-list {
+                grid-template-columns: 1fr;
+            }
+
+            .game-button {
+                min-height: 145px;
+            }
+
+            .game-icon {
+                font-size: 50px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="game-zone">
+        <h1>GAME ZONE</h1>
+
+        <p>플레이할 게임을 선택하세요!</p>
+
+        <section class="game-list">
+            <button
+                class="game-button"
+                type="button"
+                disabled
+            >
+                <span class="game-icon">🎃</span>
+                <span class="game-name">호박 요리사</span>
+                <span class="game-status">준비 중</span>
+            </button>
+
+            <button
+                class="game-button"
+                type="button"
+                disabled
+            >
+                <span class="game-icon">💇</span>
+                <span class="game-name">할로윈 미용실</span>
+                <span class="game-status">준비 중</span>
+            </button>
+
+            <button
+                id="ghost-hunt-button"
+                class="game-button available"
+                type="button"
+            >
+                <span class="game-icon">👻</span>
+                <span class="game-name">유령잡기</span>
+                <span class="game-status">플레이 가능</span>
+            </button>
+        </section>
+
+        <a class="back-button" href="admin.html">
+            운영자 화면으로 돌아가기
+        </a>
+    </main>
+
+    <script>
+        const ghostHuntButton = document.querySelector(
+            "#ghost-hunt-button"
+        );
+
+        ghostHuntButton.addEventListener(
+            "click",
+            function () {
+                location.href = "ghost-hunt.html";
+            }
+        );
+    </script>
+</body>
+</html>
