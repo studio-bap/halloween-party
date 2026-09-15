@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>유령잡기</title>
+    <link rel="icon" type="image/png" href="halloween-pumpkin-icon.png">
+    <style>
+        :root { --orange:#ff7a18; --yellow:#ffd166; --purple:#8b5cf6; }
+        * { box-sizing:border-box; }
+        html,body { width:100%; height:100%; margin:0; overflow:hidden; }
+        body { color:#fff; font-family:"Malgun Gothic",Arial,sans-serif; background:radial-gradient(circle at 50% -10%,#42205d,#13091f 45%,#020204); touch-action:manipulation; user-select:none; -webkit-user-select:none; }
+        button { font:inherit; }
+        .game { display:grid; grid-template-rows:auto 1fr; width:100%; height:100%; padding:clamp(10px,2vw,22px); gap:12px; }
+        .hud { display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:12px; padding:12px 18px; border:1px solid #8b5cf699; border-radius:18px; background:#130b20e8; box-shadow:0 8px 30px #0008; }
+        .hud h1 { margin:0; color:var(--orange); font-size:clamp(1.25rem,4vw,2.2rem); text-shadow:0 0 12px #ff7a1880; }
+        .score { text-align:center; font-weight:900; font-size:clamp(1.1rem,4vw,1.8rem); }
+        .score strong { color:var(--yellow); }
+        .timer { justify-self:end; padding:8px 14px; border-radius:12px; font-weight:900; font-size:clamp(1.1rem,4vw,1.7rem); background:#2a183a; }
+        .timer.danger { color:#fff; background:#a51c30; animation:pulse .5s infinite alternate; }
+        .field { position:relative; min-height:0; overflow:hidden; border:2px solid #49325f; border-radius:22px; background:radial-gradient(circle at 50% 100%,#2b1640,#0b0710 64%); box-shadow:inset 0 0 60px #000; }
+        .field::before { content:""; position:absolute; inset:0; pointer-events:none; opacity:.26; background:repeating-linear-gradient(115deg,transparent 0 48px,#ffffff08 49px 50px); }
+        .ghost { position:absolute; display:grid; place-items:center; width:clamp(76px,15vw,120px); height:clamp(76px,15vw,120px); padding:0; border:0; border-radius:50%; background:transparent; font-size:clamp(58px,12vw,94px); cursor:pointer; filter:drop-shadow(0 0 16px #bda2ff99); transform:translate(-50%,-50%) scale(0); animation:appear .14s ease-out forwards,float .65s .14s ease-in-out infinite alternate; -webkit-tap-highlight-color:transparent; }
+        .ghost:active { filter:brightness(1.4) drop-shadow(0 0 22px #fff); }
+        .caught { pointer-events:none; animation:caught .16s ease-in forwards; }
+        .overlay { position:fixed; inset:0; z-index:10; display:grid; place-items:center; padding:20px; text-align:center; background:#050308e8; backdrop-filter:blur(8px); }
+        .dialog { width:min(520px,100%); padding:32px 24px; border:2px solid var(--purple); border-radius:24px; background:#170d25; box-shadow:0 0 45px #8b5cf655; }
+        .dialog .big { display:block; font-size:72px; }
+        .dialog h2 { margin:8px 0; color:var(--orange); font-size:clamp(2rem,8vw,3.3rem); }
+        .dialog p { color:#d3c8df; line-height:1.65; }
+        .start,.link { display:block; width:100%; margin-top:16px; padding:15px; border:0; border-radius:13px; color:#241025; font-size:18px; font-weight:900; text-decoration:none; background:linear-gradient(135deg,var(--yellow),var(--orange)); cursor:pointer; }
+        .link { color:#fff; background:#39264c; }
+        [hidden] { display:none !important; }
+        @keyframes appear { to { transform:translate(-50%,-50%) scale(1); } }
+        @keyframes float { to { transform:translate(-50%,calc(-50% - 8px)) scale(1) rotate(3deg); } }
+        @keyframes caught { to { opacity:0; transform:translate(-50%,-50%) scale(1.8) rotate(18deg); } }
+        @keyframes pulse { to { transform:scale(1.06); } }
+        @media(max-width:560px) { .hud{grid-template-columns:1fr auto;padding:10px 12px}.hud h1{grid-column:1/-1;text-align:center}.score{text-align:left}.game{padding:8px;gap:8px}.field{border-radius:16px} }
+        @media(prefers-reduced-motion:reduce) { .ghost,.timer.danger{animation:none}.ghost{transform:translate(-50%,-50%) scale(1)} }
+    </style>
+</head>
+<body>
+    <main class="game">
+        <header class="hud">
+            <h1>👻 유령잡기</h1>
+            <div class="score">잡은 유령 <strong id="score">0</strong> / 20</div>
+            <div id="timer" class="timer">30초</div>
+        </header>
+        <section id="field" class="field" aria-label="유령잡기 게임 영역"></section>
+    </main>
+
+    <section id="start-overlay" class="overlay">
+        <div class="dialog">
+            <span class="big" aria-hidden="true">👻</span>
+            <h2>유령잡기</h2>
+            <p>화면에 나타나는 유령을 빠르게 터치하세요.<br>30초 안에 20마리를 잡으면 성공입니다!</p>
+            <button id="start-button" class="start" type="button">게임 시작</button>
+            <a class="link" href="game.html">게임 선택으로 돌아가기</a>
+        </div>
+    </section>
+
+    <section id="win-overlay" class="overlay" hidden>
+        <div class="dialog">
+            <span class="big" aria-hidden="true">🎉👻🎉</span>
+            <h2>성공!</h2>
+            <p>유령 20마리를 모두 잡았습니다! 안내원에게 부탁해 캔디를 받아가세요!</p>
+            <button id="restart-button" class="start" type="button">다시 하기</button>
+            <a class="link" href="game.html">게임 선택으로 돌아가기</a>
+        </div>
+    </section>
+
+    <script>
+        const GAME_SECONDS = 30;
+        const TARGET_SCORE = 20;
+        const field = document.querySelector("#field");
+        const scoreText = document.querySelector("#score");
+        const timerText = document.querySelector("#timer");
+        const startOverlay = document.querySelector("#start-overlay");
+        const winOverlay = document.querySelector("#win-overlay");
+        let score = 0;
+        let secondsLeft = GAME_SECONDS;
+        let playing = false;
+        let timerId = null;
+        let ghostId = null;
+
+        document.querySelector("#start-button").addEventListener("click", startGame);
+        document.querySelector("#restart-button").addEventListener("click", startGame);
+
+        function startGame() {
+            clearTimers();
+            field.replaceChildren();
+            score = 0;
+            secondsLeft = GAME_SECONDS;
+            playing = true;
+            scoreText.textContent = score;
+            updateTimer();
+            startOverlay.hidden = true;
+            winOverlay.hidden = true;
+            spawnGhost();
+            timerId = window.setInterval(tick, 1000);
+        }
+
+        function tick() {
+            secondsLeft -= 1;
+            updateTimer();
+            if (secondsLeft <= 0) loseGame();
+        }
+
+        function updateTimer() {
+            timerText.textContent = `${secondsLeft}초`;
+            timerText.classList.toggle("danger", secondsLeft <= 5);
+        }
+
+        function spawnGhost() {
+            if (!playing) return;
+            field.replaceChildren();
+            const ghost = document.createElement("button");
+            ghost.type = "button";
+            ghost.className = "ghost";
+            ghost.textContent = "👻";
+            ghost.setAttribute("aria-label", "유령 잡기");
+            const padding = 12;
+            const half = Math.min(60, Math.max(38, field.clientWidth * 0.075));
+            const usableWidth = Math.max(1, field.clientWidth - (half + padding) * 2);
+            const usableHeight = Math.max(1, field.clientHeight - (half + padding) * 2);
+            ghost.style.left = `${half + padding + Math.random() * usableWidth}px`;
+            ghost.style.top = `${half + padding + Math.random() * usableHeight}px`;
+            ghost.addEventListener("pointerdown", catchGhost, { once:true });
+            field.appendChild(ghost);
+            const delay = Math.max(430, 900 - score * 18);
+            ghostId = window.setTimeout(spawnGhost, delay);
+        }
+
+        function catchGhost(event) {
+            if (!playing) return;
+            event.preventDefault();
+            window.clearTimeout(ghostId);
+            const ghost = event.currentTarget;
+            ghost.classList.add("caught");
+            score += 1;
+            scoreText.textContent = score;
+            if (score >= TARGET_SCORE) {
+                window.setTimeout(winGame, 150);
+            } else {
+                window.setTimeout(spawnGhost, 130);
+            }
+        }
+
+        function winGame() {
+            playing = false;
+            clearTimers();
+            field.replaceChildren();
+            winOverlay.hidden = false;
+        }
+
+        function loseGame() {
+            playing = false;
+            clearTimers();
+            location.replace("punishment.html");
+        }
+
+        function clearTimers() {
+            window.clearInterval(timerId);
+            window.clearTimeout(ghostId);
+            timerId = null;
+            ghostId = null;
+        }
+    </script>
+</body>
+</html>
