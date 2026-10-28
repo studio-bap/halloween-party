@@ -1,10 +1,76 @@
 <!DOCTYPE html>
+
 <html lang="ko">
 <head>
-  <title>무덤찾기</title>
-  <link rel="icon" type="image/png" href="halloween-pumpkin-icon.png">
-<body>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>무덤찾기</title>
+    <link rel="icon" type="image/png" href="halloween-pumpkin-icon.png">
 
+```
+<style>
+    body {
+        background: #171020;
+        color: white;
+        text-align: center;
+        font-family: sans-serif;
+    }
+
+    h1 {
+        color: orange;
+    }
+
+    .grave {
+        font-size: 70px;
+        margin: 20px;
+        padding: 10px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+    }
+
+    .grave:hover {
+        transform: scale(1.1);
+    }
+
+    #result {
+        margin-top: 30px;
+    }
+</style>
+```
+
+</head>
+
+<body>
+    <h1>💀 무덤찾기</h1>
+    <p>무덤을 클릭해 보세요!</p>
+
+```
+<button class="grave" onclick="openGrave()">🪦</button>
+<button class="grave" onclick="openGrave()">🪦</button>
+<button class="grave" onclick="openGrave()">🪦</button>
+
+<h2 id="result">과연 어떤 결과가 나올까요?</h2>
+
+<script>
+    function openGrave() {
+        const results = [
+            "🍫초콜릿을 받아 가세요!",
+            "💀 꽝!",
+            "👻 귀신 등장!"
+        ];
+
+        const random = Math.floor(Math.random() * 3);
+
+        if (random === 2) {
+            window.location.href = "punishment.html";
+        } else {
+            document.getElementById("result").textContent = results[random];
+        }
+    }
+</script>
+```
 
 </body>
-</head>
+</html>
+
