@@ -66,6 +66,7 @@
           <div class="game-grid">
             <label class="game-card"><input type="radio" name="game" value="halloween-salon" required><span class="icon">🐱</span><span>냥구키우기</span></label>
             <label class="game-card"><input type="radio" name="game" value="ghost-hunt"><span class="icon">👻</span><span>유령잡기</span></label>
+            <label class="game-card"><input type="radio" name="game" value="findtomb"><span class="icon">💀</span><span>무덤찾기</span></label>
           </div>
         </fieldset>
 
@@ -85,7 +86,7 @@
   <script>
     const form = document.querySelector("#reservation-form");
     const result = document.querySelector("#result");
-    const gameNames = { "halloween-salon":"할로윈 미용실", "ghost-hunt":"유령잡기" };
+    const gameNames = { "halloween-salon":"할로윈 미용실", "ghost-hunt":"유령잡기", "findtomb":"무덤찾기" };
 
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
